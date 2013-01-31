@@ -1,3 +1,9 @@
+/*******************************
+Name: Chris Malon
+Date: 1/31/13
+Description: Chutes and Ladders
+*******************************/
+
 #include<iomanip>
 #include<iostream>
 #include<cstdlib>
@@ -45,10 +51,10 @@ void createBoard(int board[rows][cols])
 void displayBoard(int board[rows][cols])
 {
     int r, c;
-    for (r=0; r<rows; r++)
+    for (r=rows; r>=rows; r--)
     {
-        for (c=0; c<cols; c++)
-            cout<<board[r][c];
+        for (c=cols; c>=cols; c--)
+            cout<<board[c][r];
             cout << endl;
     }
 }
