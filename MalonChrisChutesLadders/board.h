@@ -12,13 +12,15 @@ Description: Chutes and Ladders
 #include <windows.h>
 #define NUMINNERSPACE 5
 
-enum COLOR{BLACK=0, BLUE=9, GREEN=10, RED=12, YELLOW=14};
+enum COLOR{BLUE=9, GREEN=10, RED=12, YELLOW=14};
 
 int *playerColor;
 const int BOARDSIZE = 100;
 int NUMPLAYERS;
 
 using namespace std;
+
+HANDLE console = GetStdHandle (STD_OUTPUT_HANDLE);
 
 struct player
 {
@@ -126,27 +128,21 @@ void displayBoard()
                 //displaying the player occuping the square
                 else
                 {
-                    CONSOLE_SCREEN_BUFFER_INFO csbi;
-                    HANDLE hdl;
-                    GetConsoleScreenBufferInfo(hdl, &csbi);
-                    int dcolor = csbi.wAttributes;
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
                     for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == bPos)
                         {
-                            //GetConsoleScreenBufferInfo(hdl, &csbi);
-                            SetConsoleTextAttribute(hdl,playerColor[k]);
+                            SetConsoleTextAttribute(console,playerColor[k]);
                             cout << k;
                             spaceLeft--;
                         }
                     }
-                    SetConsoleTextAttribute(hdl,dcolor);
+                    SetConsoleTextAttribute(console,15);
                     for (int k = 0; k < spaceLeft; k++)
                         cout << "_";
                     cout << "|";
-                    //cout<<Board[bPos].posValue;
                 }
                 bPos--;
             }
@@ -182,23 +178,18 @@ void displayBoard()
 
                 else
                 {
-                    CONSOLE_SCREEN_BUFFER_INFO csbi;
-                    HANDLE hdl;
-                    GetConsoleScreenBufferInfo(hdl, &csbi);
-                    int defaultColor = csbi.wAttributes;
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
                     for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == j)
                         {
-                            //GetConsoleScreenBufferInfo(hdl, &csbi);
-                            SetConsoleTextAttribute(hdl,playerColor[k]);
+                            SetConsoleTextAttribute(console,playerColor[k]);
                             cout << k;
                             spaceLeft--;
                         }
                     }
-                    SetConsoleTextAttribute(hdl,defaultColor);
+                    SetConsoleTextAttribute(console, 15);
                     for (int k = 0; k < spaceLeft; k++)
                         cout << "_";
                     cout << "|";
