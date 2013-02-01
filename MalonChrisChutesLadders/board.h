@@ -101,7 +101,7 @@ void displayBoard()
                 {
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
-                    for (int k = 0;k < NUMPLAYERS; ++k)
+                    for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == bPos)
                         {
@@ -142,7 +142,7 @@ void displayBoard()
                 {
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
-                    for (int k = 0;k < NUMPLAYERS; ++k)
+                    for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == j)
                         {
@@ -184,9 +184,9 @@ void runGame()
         int sameSpotCount = 0;
         //check all the players except the one just rolled
         bool goout = false;
-        for (int l = 0; l < NUMPLAYERS; ++l)
+        for (int l = 0; l < NUMPLAYERS; l++)
         {
-            for (int m = l+1; m < NUMPLAYERS; ++m)
+            for (int m = l+1; m < NUMPLAYERS; m++)
             {
                 if (players[l].position == players[m].position)
                 {
@@ -198,6 +198,7 @@ void runGame()
 
         if (goout == false)
             Board[players[count].position].posValue = -1;      //clear the old position
+
         players[count].position += diceNum;
         int tempPos = players[count].position;      //player current position
         Board[tempPos].posValue = count;

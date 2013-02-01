@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1359681703 source:c:\users\zero\documents\github\chutesandladders\malonchrischutesladders\main.cpp
+1359683605 source:c:\users\zero\documents\github\chutesandladders\malonchrischutesladders\main.cpp
 	"board.h"
 
-1359683114 c:\users\zero\documents\github\chutesandladders\malonchrischutesladders\board.h
+1359687517 c:\users\zero\documents\github\chutesandladders\malonchrischutesladders\board.h
 	<iostream>
 	<ctime>
 	<cstdlib>
