@@ -74,10 +74,21 @@ void initPlayer(int numPlayers)
 void displayBoard()
 {
     int bPos = BOARDSIZE-1;
+    int topNumber = 0;
     for (int i=0; i<10; i++)
     {
         if((i&1)==0)
         {
+            //printing the top number
+            topNumber = bPos;
+            for (int j = 0; j < 10; ++j)
+            {
+                if ((topNumber-10) < 0)
+                    cout << "   " << topNumber << "   ";
+                cout << "   " << topNumber << "  ";
+                topNumber--;
+            }
+            cout << endl << endl;
             for(int j=0; j<10; j++)
             {
                 if (Board[bPos].posValue == -1)
@@ -120,6 +131,14 @@ void displayBoard()
 
         else
         {
+            topNumber = bPos;
+            for (int j = topNumber-9; j <= topNumber; ++j)
+            {
+                if ((j-10) < 0)
+                    cout << "   " << j << "   ";
+                else cout << "   " << j << "  ";
+            }
+            cout << endl << endl;
             for(int j=bPos-9; j<=bPos; j++)
             {
                 if (Board[j].posValue == -1)
@@ -170,8 +189,7 @@ int DiceRoll()
 
 void runGame()
 {
-    int count = 0
-    ;
+    int count = 0;
     int diceNum;
     while(Board[BOARDSIZE-1].posValue == -1)
     {
