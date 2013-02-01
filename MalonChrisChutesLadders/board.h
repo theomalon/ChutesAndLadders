@@ -9,8 +9,12 @@ Description: Chutes and Ladders
 #include <cstdlib>
 #include <cstdio>
 #include <climits>
+#include <windows.h>
 #define NUMINNERSPACE 5
 
+enum COLOR{BLACK=0, BLUE=9, GREEN=10, RED=12, YELLOW=14};
+
+int *playerColor;
 const int BOARDSIZE = 100;
 int NUMPLAYERS;
 
@@ -65,9 +69,21 @@ void initPlayer(int numPlayers)
 {
     NUMPLAYERS = numPlayers;
     players = new struct player[NUMPLAYERS];
+    playerColor = new int[NUMPLAYERS];
     for (int i=0; i<NUMPLAYERS; i++)
     {
         players[i].position = -1;
+        switch(i)
+        {
+            case 0: playerColor[i] = BLUE;
+                    break;
+            case 1: playerColor[i] = GREEN;
+                    break;
+            case 2: playerColor[i] = YELLOW;
+                    break;
+            case 3: playerColor[i] = RED;
+                    break;
+        }
     }
 }
 
@@ -110,16 +126,23 @@ void displayBoard()
                 //displaying the player occuping the square
                 else
                 {
+                    CONSOLE_SCREEN_BUFFER_INFO csbi;
+                    HANDLE hdl;
+                    GetConsoleScreenBufferInfo(hdl, &csbi);
+                    int dcolor = csbi.wAttributes;
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
                     for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == bPos)
                         {
+                            //GetConsoleScreenBufferInfo(hdl, &csbi);
+                            SetConsoleTextAttribute(hdl,playerColor[k]);
                             cout << k;
                             spaceLeft--;
                         }
                     }
+                    SetConsoleTextAttribute(hdl,dcolor);
                     for (int k = 0; k < spaceLeft; k++)
                         cout << "_";
                     cout << "|";
@@ -159,16 +182,23 @@ void displayBoard()
 
                 else
                 {
+                    CONSOLE_SCREEN_BUFFER_INFO csbi;
+                    HANDLE hdl;
+                    GetConsoleScreenBufferInfo(hdl, &csbi);
+                    int defaultColor = csbi.wAttributes;
                     cout << "|";
                     int spaceLeft = NUMINNERSPACE;
                     for (int k = 0;k < NUMPLAYERS; k++)
                     {
                         if (players[k].position == j)
                         {
+                            //GetConsoleScreenBufferInfo(hdl, &csbi);
+                            SetConsoleTextAttribute(hdl,playerColor[k]);
                             cout << k;
                             spaceLeft--;
                         }
                     }
+                    SetConsoleTextAttribute(hdl,defaultColor);
                     for (int k = 0; k < spaceLeft; k++)
                         cout << "_";
                     cout << "|";
