@@ -239,6 +239,10 @@ void runGame()
             Board[players[count].position].posValue = -1;      //clear the old position
 
         players[count].position += diceNum;
+        if(players[count].position > BOARDSIZE-1)
+        {
+            players[count].position = BOARDSIZE-1;
+        }
         int tempPos = players[count].position;      //player current position
         Board[tempPos].posValue = count;
         cout<<"Player "<<count<<" position is "<<tempPos<<"."<<endl;
