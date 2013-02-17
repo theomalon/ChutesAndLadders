@@ -1,0 +1,1 @@
+Simulates the Chutes and Ladders board game through the console.
